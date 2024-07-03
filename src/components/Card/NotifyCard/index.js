@@ -1,1 +1,1 @@
-import { default } from './NotifyCard';
+export { default } from './NotifyCard';

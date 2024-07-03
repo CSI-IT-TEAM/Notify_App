@@ -1,16 +1,16 @@
 import { StyleSheet, View } from 'react-native';
 
-export default function BottomSheet({children}){
-    return(
+export default function BottomSheet({ children }) {
+    return (
         <View style={styles.container}>
-        <View style={styles.box}></View>
-        {children}
-    </View>
+            <View style={styles.box}></View>
+            {children}
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-        container: {
+    container: {
         flex: 1,
         paddingTop: 25,
         paddingHorizontal: 15,

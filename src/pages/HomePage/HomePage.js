@@ -5,10 +5,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Appbar, Avatar } from 'react-native-paper';
 import { FlatGrid } from 'react-native-super-grid';
 
-import Header from '@components/Header/Header';
+import Header from '@components/Header';
 import Layout, { BottomSheet } from '@components/Layout';
-import StatusCard from '@components/Card/StatusCard/StatusCard';
-import NotifyCard from '@components/Card/NotifyCard/NotifyCard';
+import StatusCard from '@components/Card/StatusCard';
+import NotifyCard from '@components/Card/NotifyCard';
 
 import { handleRegistrationError } from '@function';
 import { statusList } from '@data';

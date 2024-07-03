@@ -3,8 +3,7 @@ import { Avatar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function AvatarCard({ data, selectIDx, handleChange }) {
-
-    return(
+    return (
         <TouchableOpacity style={styles.container} onPress={() => handleChange(data.name)}>
             <Avatar.Image size={70} source={data.thumb} />
             {selectIDx === data.name &&
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 25,
         height: 25,
-        borderRadius: '100%',
+        borderRadius: 100,
         backgroundColor: 'seagreen',
         display: 'flex',
         alignItems: 'center',
@@ -35,4 +34,4 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
     }
- });
+});

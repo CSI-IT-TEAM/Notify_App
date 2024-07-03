@@ -104,3 +104,27 @@ export const languageList = [
         thumb: require('../../assets/images/language/vn.png'),
     },
 ]
+
+export const introList = [
+    {
+        id: 0,
+        name: 'intro-1',
+        title: 'Save time by tracking work process',
+        desc: 'Get track on alert notifications in real time',
+        thumb: require('../../assets/images/banners/banner-1.png'),
+    },
+    {
+        id: 1,
+        name: 'intro-2',
+        title: 'Always stay on top of your career',
+        desc: 'Reducing your stress, increasing your productivity',
+        thumb: require('../../assets/images/banners/banner-2.png'),
+    },
+    {
+        id: 2,
+        name: 'intro-3',
+        title: 'Spend more time doing the things you love',
+        desc: 'Get started now',
+        thumb: require('../../assets/images/banners/banner-3.png'),
+    },
+]

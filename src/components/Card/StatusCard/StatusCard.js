@@ -8,7 +8,7 @@ type StatusCardType = {
     color: string,
 }
 
-export default function StatusCard ({ title, desc, icon, color } : StatusCardType) {
+export default function StatusCard({ title, desc, icon, color }: StatusCardType) {
     return (
         <>
             <View style={[styles.container, { backgroundColor: `${color}`, }]}>
@@ -16,8 +16,8 @@ export default function StatusCard ({ title, desc, icon, color } : StatusCardTyp
                     <Icon name={icon} size={26} color={'#fff'} />
                 </View>
                 <View>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.desc}>10 {desc}</Text>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.desc}>10 {desc}</Text>
                 </View>
             </View>
         </>
@@ -25,7 +25,6 @@ export default function StatusCard ({ title, desc, icon, color } : StatusCardTyp
 }
 
 const styles = StyleSheet.create({
-
     container: {
         paddingVertical: 15,
         paddingHorizontal: 15,
@@ -34,24 +33,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         gap: 5
-      },
-      icon: {
+    },
+    icon: {
         width: 50,
         height: 50,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '50%',
+        borderRadius: 50,
         backgroundColor: 'rgba(0,0,0,0.2)',
-      },
-      title: {
+    },
+    title: {
         fontWeight: '600',
         fontSize: 17,
         marginBottom: 3,
-      },
-      desc: {
+    },
+    desc: {
         fontSize: 14,
         fontWeight: '500',
         color: 'rgba(0,0,0,0.5)',
-      }
- });
+    }
+});

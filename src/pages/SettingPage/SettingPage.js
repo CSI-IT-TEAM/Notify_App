@@ -4,22 +4,21 @@ import { Avatar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Layout from '@components/Layout';
-import Header from '@components/Header/Header';
-import SettingCard from '@components/Card/SettingCard/SettingCard';
+import Header from '@components/Header';
+import SettingCard from '@components/Card/SettingCard';
 import { settingsList } from '@data';
 
 export default function SettingPage({ navigation }) {
-
 
     const handleBack = () => {
         navigation.goBack();
     }
 
-    const handleNavigate = (pathName : string) => {
+    const handleNavigate = (pathName: string) => {
         navigation.navigate(pathName);
     }
 
-    return(
+    return (
         <Layout>
             <View style={styles.container}>
                 <View style={styles.thumb}>
@@ -30,18 +29,13 @@ export default function SettingPage({ navigation }) {
                 </View>
                 <Text style={styles.title}>David Arthur</Text>
                 <Text style={styles.desc}>@Admin</Text>
-                
             </View>
-
             {settingsList.map(item => {
                 return (
                     <SettingCard key={item.id} data={item} handleNavigate={handleNavigate} />
                 )
             })}
-            
-
         </Layout>
-
     )
 }
 
@@ -56,7 +50,7 @@ const styles = StyleSheet.create({
     },
     thumb: {
         borderWidth: 3,
-        borderRadius: '100%',
+        borderRadius: 100,
         borderColor: '#ededed',
         padding: 5,
         marginBottom: 15
@@ -74,7 +68,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 50,
         height: 50,
-        borderRadius: '100%',
+        borderRadius: 100,
         backgroundColor: '#ededed',
         display: 'flex',
         alignItems: 'center',
@@ -90,4 +84,4 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 2,
     }
- });
+});

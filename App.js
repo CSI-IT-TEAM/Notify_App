@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { PaperProvider, MD3LightTheme as DefaultTheme, BottomNavigation, Text } from 'react-native-paper';
+import { PaperProvider, MD3LightTheme as DefaultTheme, BottomNavigation, Text, Badge } from 'react-native-paper';
+import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -92,7 +93,12 @@ const BottomTabNavigator = () => (
                                 ? options.title
                                 : route.title;
 
-                    return <Text style={{ textAlign: 'center', fontWeight: '500', fontSize: 13, color: focused ? '#3f51b5' : 'gray', marginTop: -3 }}>{label}</Text>;
+                    return (
+                        <View>
+                            {options?.tabBarBadge && <Badge style={{position: 'absolute', top: -40, left: '50%'}}>{options?.tabBarBadge}</Badge>}
+                            <Text style={{ textAlign: 'center', fontWeight: '500', fontSize: 13, color: focused ? '#3f51b5' : 'gray', marginTop: -3 }}>{label}</Text>
+                        </View>
+                    );
                 }}
             />
         )}
@@ -115,6 +121,7 @@ const BottomTabNavigator = () => (
                 tabBarIcon: ({ focused, color, size }) => {
                     return <Ionicon name={focused ? 'book' : 'book-outline'} size={size} color={color} />;
                 },
+                tabBarBadge: 3,
             }}
         />
         <Tab.Screen
@@ -130,7 +137,6 @@ const BottomTabNavigator = () => (
     </Tab.Navigator>
 )
 
-
 export default function App() {
     return (
         <SafeAreaProvider>
@@ -143,6 +149,7 @@ export default function App() {
                             animationTypeForReplace: 'pop'
                         }}
                     >
+                        <RootStack.Screen name="IntroPage" component={IntroPage} />
                         <RootStack.Screen name="SigninPage" component={SigninPage} />
                         <RootStack.Screen
                             name="MainPage"
