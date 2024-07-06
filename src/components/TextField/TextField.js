@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
-export default function TextField({ type, value, handleEvent }) {
-    const [data, setData] = useState(value);
+export default function TextField({ type, placeholder, name, value, handleEvent, handleChange }) {
     const [secure, setSecure] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const activeColor = isActive ? '#5694f2' : '#000';
@@ -17,6 +16,12 @@ export default function TextField({ type, value, handleEvent }) {
         setIsActive(false);
     }
 
+    const handleSecure = (e) => {
+        e.stopPropagation();
+        setSecure(secure => !secure);
+        setIsActive(isActive => false);
+    }
+
     switch (type) {
         case 'password':
             return (
@@ -25,12 +30,12 @@ export default function TextField({ type, value, handleEvent }) {
                     outlineColor={activeColor}
                     activeOutlineColor={activeColor}
                     secureTextEntry={secure}
-                    placeholder='Enter your password'
-                    right={<TextInput.Icon forceTextInputFocus onPress={() => setSecure(secure => !secure)} icon={secure ? 'eye' : 'eye-off'} />}
+                    placeholder={placeholder}
+                    right={<TextInput.Icon forceTextInputFocus onPress={handleSecure} icon={secure ? 'eye' : 'eye-off'} />}
                     style={styles.text}
                     outlineStyle={[styles.outlineContainer, { shadowColor: activeColor }]}
-                    value={data}
-                    onChangeText={text => setData(data => text)}
+                    value={value}
+                    onChangeText={text => handleChange(name, text)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />
@@ -41,14 +46,13 @@ export default function TextField({ type, value, handleEvent }) {
                     mode='outlined'
                     outlineColor={activeColor}
                     activeOutlineColor={activeColor}
-                    placeholder='Enter your account'
+                    placeholder={placeholder}
                     style={styles.text}
                     outlineStyle={[styles.outlineContainer, { shadowColor: activeColor }]}
-                    value={data}
-                    onChangeText={text => setData(data => text)}
+                    value={value}
+                    onChangeText={text => handleChange(name, text)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
-
                 />
             )
     }
@@ -57,7 +61,8 @@ export default function TextField({ type, value, handleEvent }) {
 const styles = StyleSheet.create({
     text: {
         paddingLeft: 5,
-        fontWeight: '500'
+        fontWeight: '500',
+        fontSize: 18,
     },
     outlineContainer: {
         borderRadius: 20,

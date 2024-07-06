@@ -1,0 +1,42 @@
+{
+    "sel_language": "Chọn Ngôn ngữ",
+    "sel_avatar": "Chọn Ảnh đại diện",
+    "en": "Tiếng Anh",
+    "vn": "Tiếng Việt",
+
+    "reged": "Đăng ký",
+    "canceled": "Hủy bỏ",
+    "total": "Tổng",
+    "today": "Hôm nay",
+
+    "hello": "Xin chào",
+    "slogan": "Cuộc phiêu lưu của bạn bắt đầu ngay bây giờ",
+    "welcome": "Chào mừng trở lại",
+    "notify_login": "Vui lòng đăng nhập để tiếp tục sử dụng ứng dụng",
+
+    "lang": "Ngôn ngữ",
+    "signin": "Đăng nhập",
+    "signout": "Đăng xuất",
+    "notify_list": "Danh sách thông báo",
+    "permis_req_title": "Yêu cầu cấp quyền",
+    "permis_req_desc": "Vui lòng cho phép ứng dụng này gửi thông báo tới điện thoại của bạn",
+
+    "home": "Trang chủ",
+    "notify": "Thông báo",
+    "setting": "Cài đặt",
+
+    "user_nm": "Tên tài khoản",
+    "pl_user_nm": "Nhập tên tài khoản",
+    "pass": "Mật khẩu",
+    "pl_pass": "Nhập mật khẩu",
+    "remember_me": "Ghi nhớ tôi",
+
+    "no_internet": "Không có kết nối Internet",
+    "inval_user": "Tên tài khoản không hợp lệ",
+    "inval_pass": "Mật khẩu không hợp lệ",
+    "inval_user_pass": "Tên tài khoản hoặc mật khẩu không hợp lệ",
+    "update_success": "Cập nhật thành công",
+    "update_fail": "Cập nhật thất bại",
+
+    "btn_req": "Cấp quyền"
+}

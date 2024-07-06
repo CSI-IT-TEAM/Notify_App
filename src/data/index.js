@@ -1,21 +1,32 @@
 export const statusList = [
     {
-        id: 1,
-        title: 'Registered',
+        id: 'status-1',
+        title: 'Total',
+        name: 'total',
         desc: 'Tasks',
-        icon: 'addfile',
+        icon: 'book',
         color: '#5c8eda',
     },
     {
-        id: 2,
+        id: 'status-2',
+        title: 'Registered',
+        name: 'reged',
+        desc: 'Tasks',
+        icon: 'addfile',
+        color: '#6cb28e',
+    },
+    {
+        id: 'status-3',
         title: 'Canceled',
+        name: 'canceled',
         desc: 'Tasks',
         icon: 'rocket1',
         color: '#f26e56',
     },
     {
-        id: 3,
+        id: 'status-4',
         title: 'Today',
+        name: 'today',
         desc: 'Messages',
         icon: 'clockcircleo',
         color: '#f7be45',
@@ -26,12 +37,14 @@ export const settingsList = [
     {
         id: 1,
         title: 'Language',
+        name: 'lang',
         icon: 'earth',
         path: 'LanguagePage'
     },
     {
         id: 2,
         title: 'Sign out',
+        name: 'signout',
         icon: 'logout',
         path: 'SigninPage'
     },

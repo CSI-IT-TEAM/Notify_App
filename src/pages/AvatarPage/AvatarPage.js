@@ -6,6 +6,7 @@ import Layout from '@components/Layout';
 import Header from '@components/Header/Header';
 import { avatarList } from '@data';
 import AvatarCard from '@components/Card/AvatarCard/AvatarCard';
+import i18n from '@utils/i18n';
 
 export default function AvatarPage({ navigation }) {
     const [selectThumb, setSelectThumb] = useState('avatar-1');
@@ -19,7 +20,7 @@ export default function AvatarPage({ navigation }) {
 
     return (
         <Layout>
-            <Header title='Select Avatar' handleNavigate={handleBack} />
+            <Header title={i18n.t('sel_avatar')} handleNavigate={handleBack} />
             <View style={styles.container}>
                 <FlatGrid
                     itemDimension={70}

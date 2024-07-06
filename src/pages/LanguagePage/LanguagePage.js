@@ -1,35 +1,49 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Divider } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import Layout from '@components/Layout';
 import Header from '@components/Header';
-import { languageList } from '../../data';
+import { languageList } from '@data';
 
 export default function LanguagePage({ navigation }) {
+    ///// Init Variable
+    const { t, i18n } = useTranslation()
+    const lang =
+            i18n.language !== null &&
+            i18n.language !== undefined &&
+            i18n.language !== ""
+                    ? i18n.language
+            : "en";
 
-    const [lang, setLang] = useState('en');
+    //// Navigate Back
     const handleBack = () => {
         navigation.goBack();
     }
 
+    //// Handle Language
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng)
+    };
+
     return (
         <Layout>
-            <Header title='Select Language' handleNavigate={handleBack} />
+            <Header title={i18n.t('sel_language')} handleNavigate={handleBack} />
             <View style={styles.container}>
                 {languageList.map((item, index) => {
                     return (
                         <View key={item.id}>
-                            <View style={styles.cardContainer}>
+                            <TouchableOpacity style={styles.cardContainer} onPress={() => changeLanguage(item.name)}>
                                 <Image style={{ width: 60, height: 40 }} source={item.thumb} />
-                                <Text style={styles.title}>{item.title}</Text>
+                                <Text style={styles.title}>{i18n.t(item.name)}</Text>
                                 {lang === item.name &&
                                     <View style={styles.btn}>
                                         <Icon name="check" size={18} color='#fff' />
                                     </View>
                                 }
-                            </View>
+                            </TouchableOpacity>
                             <Divider />
                         </View>
                     )

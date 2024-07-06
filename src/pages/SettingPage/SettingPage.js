@@ -1,34 +1,81 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Avatar } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Layout from '@components/Layout';
 import Header from '@components/Header';
 import SettingCard from '@components/Card/SettingCard';
+import AvatarBox from '@components/AvatarBox';
+import NotifyToast from '@components/Toast';
 import { settingsList } from '@data';
+import { getAuthUserConfig } from '@utils/config';
+import { storeKeyConfig, getData, getDataObject, removeData } from '@utils/storage';
+import { useSpinner } from '@store/Spinner';
+import { selectURL } from '@api';
+import { getLastTwoWords, fetchData, isNullOrEmpty } from '@function';
+import { useExpoNotify, useNetwork } from '@hooks';
 
 export default function SettingPage({ navigation }) {
+    ///// Init Variable
+    const [data, setData] = useState(null);
+    const { dispatch } = useSpinner();
 
-    const handleBack = () => {
-        navigation.goBack();
-    }
+    ///// Custom Hook
+    const { expoPushToken } = useExpoNotify();
+    const { netStatus } = useNetwork();
+    const { t, i18n } = useTranslation();
 
-    const handleNavigate = (pathName: string) => {
-        navigation.navigate(pathName);
+    useEffect(() => {
+        const getUserInfo = async() => {
+            const remenberInfo = await getDataObject(storeKeyConfig.REMEMBER_INFO);
+            setData(data => remenberInfo || null);
+        }
+
+        const unsubscribe = navigation.addListener('focus', async() => {
+            getUserInfo();
+        });
+    
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
+
+    //// Handle Navigate
+    const handleNavigate = async (pathName: string) => {
+        if (pathName === 'SigninPage') {
+            //// Check Internet Status
+            if (!netStatus) {
+                NotifyToast(type = 'error', title = t('no_internet'));
+                return;
+            }
+            //// Update Data
+            const userData = await getDataObject(storeKeyConfig.REMEMBER_INFO);
+            let checkLoginData = await fetchData(selectURL, getAuthUserConfig('LOGOUT', userData?.USER_ID, expoPushToken, userData?.USER_LOGIN_DATE));
+
+            if(!isNullOrEmpty(checkLoginData)){
+                await removeData(storeKeyConfig.USER_INFO);
+                dispatch({ type: 'invalidUser' });
+                navigation.navigate(pathName);
+            }
+        }
+        else {
+            navigation.navigate(pathName);
+        }
     }
 
     return (
         <Layout>
             <View style={styles.container}>
                 <View style={styles.thumb}>
-                    <Avatar.Image size={150} source={require('../../../assets/images/avatars/avatar-1.png')} />
-                    <TouchableOpacity style={styles.btn} onPress={() => handleNavigate('AvatarPage')}>
+                    <AvatarBox size={150} thumb={data?.USER_IMG} type={data?.USER_IMG_TYPE} />
+                    {/* <TouchableOpacity style={styles.btn} onPress={() => handleNavigate('AvatarPage')}>
                         <Icon name="image" size={28} color='#555' />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
-                <Text style={styles.title}>David Arthur</Text>
-                <Text style={styles.desc}>@Admin</Text>
+                <Text style={styles.title}>{data?.USER_NM}</Text>
+                <Text style={styles.desc}>@{data?.USER_JOB}</Text>
             </View>
             {settingsList.map(item => {
                 return (

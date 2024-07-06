@@ -1,0 +1,43 @@
+{
+    "sel_language": "Select Language",
+    "sel_avatar": "Select Avatar",
+    "en": "English",
+    "vn": "Vietnamese",
+
+    "reged": "Registered",
+    "canceled": "Canceled",
+    "total": "Total",
+    "today": "Today",
+
+    "hello": "Hello",
+    "slogan": "Your daily adventure starts now",
+    "welcome": "Welcome back",
+    "notify_login": "Please login to continue using our app",
+
+    "lang": "Language",
+    "signin": "Sign in",
+    "signout": "Sign out",
+    "notify_list": "Notify List",
+    "permis_req_title": "Permission Required",
+    "permis_req_desc": "Please allow this app to send notifications to your mobile",
+
+    "home": "Home",
+    "notify": "Notify",
+    "setting": "Settings",
+
+    "user_nm": "User Name",
+    "pl_user_nm": "Enter your user name",
+    "pass": "Password",
+    "pl_pass": "Enter your password",
+    "remember_me": "Remember me",
+
+    "no_internet": "No Internet connection",
+    "inval_user": "Invalid User Name",
+    "inval_pass": "Invalid Password",
+    "inval_user_pass": "Invalid User or Password",
+    "update_success": "Update Completed",
+    "update_fail": "Update Failed",
+
+    "btn_req": "Grant Permissions"
+}
+  

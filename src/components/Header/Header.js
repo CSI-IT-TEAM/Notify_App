@@ -1,9 +1,14 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Appbar, Avatar } from 'react-native-paper';
-
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
+import { useNavigation } from '@react-navigation/native';
+import { storeKeyConfig, getData, getDataObject } from '@utils/storage';
+import { getLastTwoWords } from '@function';
+import i18n from '@utils/i18n';
+import AvatarBox from '@components/AvatarBox';
 
 type HeaderType = {
     type?: string,
@@ -12,16 +17,39 @@ type HeaderType = {
 }
 
 export default function Header({ type, title, handleNavigate }: HeaderType) {
+    ///// Init Variable
+    const [data, setData] = useState(null);
+    const name = data ? getLastTwoWords(data?.USER_NM) : 'Guest';
+    const thumb = data?.USER_IMG || null;
+    const thumbType = data?.USER_IMG_TYPE || '';
+
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        const getUserInfo = async() => {
+            const remenberInfo = await getDataObject(storeKeyConfig.REMEMBER_INFO);
+            setData(data => remenberInfo || null);
+        }
+        getUserInfo();
+
+        const unsubscribe = navigation.addListener('focus', async() => {
+            getUserInfo();
+        });
+    
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
+
     if (type === 'Home') {
         return (
             <View style={styles.dFlex}>
                 <View style={styles.dFlexCenter}>
                     <View>
-                        <Text style={styles.title}>Hello, David 👋</Text>
-                        <Text style={styles.desc}>Your daily adventure starts now</Text>
+                        <Text style={styles.title}>{i18n.t('hello')}, {name} 👋</Text>
+                        <Text style={styles.desc}>{i18n.t('slogan')}</Text>
                     </View>
                 </View>
-                <Avatar.Image size={60} source={require('../../../assets/images/avatars/avatar-1.png')} />
+                <AvatarBox size={60} thumb={thumb} type={thumbType}/>
             </View>
         )
     }
@@ -30,8 +58,8 @@ export default function Header({ type, title, handleNavigate }: HeaderType) {
             <View>
                 <View style={styles.dFlexTop}>
                     <View>
-                        <Text style={styles.title}>Welcome Back 👋</Text>
-                        <Text style={styles.desc}>Please login to continue using our app</Text>
+                        <Text style={styles.title}>{i18n.t('welcome')} 👋</Text>
+                        <Text style={styles.desc}>{i18n.t('notify_login')}</Text>
                     </View>
                 </View>
             </View>

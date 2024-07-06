@@ -1,18 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Animated, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import i18n from '@utils/i18n';
 
 export default function SettingCard({ data, handleNavigate }) {
-
-    const [isNotify, setIsNotify] = useState(false);
-
     return (
         <TouchableOpacity style={styles.container} onPress={() => handleNavigate(data.path)}>
             <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 15 }}>
                 <View style={styles.btn}>
                     <Icon name={data.icon} size={24} />
                 </View>
-                <Text style={styles.title}>{data.title}</Text>
+                <Text style={styles.title}>{i18n.t(data.name)}</Text>
             </View>
             <View style={[styles.btn, { backgroundColor: '#fff', width: 'auto', }]}>
                 <Icon name='right' size={24} />
