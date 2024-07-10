@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 import { Appbar, Avatar } from 'react-native-paper';
 import { FlatGrid } from 'react-native-super-grid';
 import { useTranslation } from 'react-i18next';
 
 import Header from '@components/Header';
 import Layout, { BottomSheet } from '@components/Layout';
-import StatusCard from '@components/Card/StatusCard';
-import NotifyCard from '@components/Card/NotifyCard';
+import StatusCard from '@components/Card/Status';
+import NotifyCard from '@components/Card/Notify';
 import NotifyToast from '@components/Toast';
+import EmptyCard from '@components/Card/Empty';
 import { fetchData, isNullOrEmpty, checkValidToken } from '@function';
 import { statusList } from '@data';
 import { selectURL } from '@api';
@@ -16,8 +17,6 @@ import { storeKeyConfig, getData, getDataObject } from '@utils/storage';
 import { getUpdateUserAlarmConfig } from '@utils/config';
 import { useSpinner } from '@store/Spinner';
 import { useExpoNotify, useNetwork } from '@hooks';
-
-const { width, height } = Dimensions.get('screen');
 
 const NotifyList = ({ data, loading, expoPushToken, handleUpdate }) => {
     //// Init Variable
@@ -33,21 +32,11 @@ const NotifyList = ({ data, loading, expoPushToken, handleUpdate }) => {
 
     if (expoPushToken === '__') {
         return (
-            <>
-                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                    <View style={{ marginBottom: 15 }}>
-                        <Image source={require('../../../assets/images/icons/icon-block.png')}
-                            style={{ width: 120, height: 120 }} />
-                    </View>
-                    <View style={{ width: width * 0.7, alignItems: 'center', marginBottom: 30 }}>
-                        <Text style={styles.reqTitle}>{t('permis_req_title')}</Text>
-                        <Text style={styles.reqDesc}>{t('permis_req_desc')}</Text>
-                    </View>
-                    <TouchableOpacity style={[styles.btn]} onPress={() => { }}>
-                        <Text style={styles.btnTitle}>{t('btn_req')}</Text>
-                    </TouchableOpacity>
-                </View>
-            </>
+            <EmptyCard 
+                type='block'
+                title={t('permis_req_title')}
+                desc={t('permis_req_desc')}
+            />
         )
     }
 
@@ -57,6 +46,8 @@ const NotifyList = ({ data, loading, expoPushToken, handleUpdate }) => {
             keyExtractor={(item) => item.ALARM_ID}
             renderItem={({ item }) => <NotifyCard data={item} onUpdate={handleUpdate} />}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1 }}
+            ListEmptyComponent={<EmptyCard title={t('not_found_title')} desc={t('not_found_desc')} />}
         />
     )
 }
@@ -84,6 +75,12 @@ export default function HomePage({ navigation }) {
                 'V_P_EMPID': remenberInfo?.USER_ID ?? '',
                 'OUT_CURSOR': ''
             });
+            posData = posData?.map(item => {
+                return {
+                    ...item,
+                    'ALARM_DESC': t(item.ALARM_DESC)
+                }
+            })
 
             setEmpID(empID => remenberInfo?.USER_ID ?? '');
             setDataList(dataList => posData);
@@ -207,28 +204,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 15,
     },
-    reqTitle: {
-        fontWeight: '600',
-        fontSize: 20,
-        marginBottom: 5,
-    },
-    reqDesc: {
-        fontWeight: '500',
-        fontSize: 14,
-        color: 'rgba(0,0,0,0.5)',
-        textAlign: 'center'
-    },
-    btn: {
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        borderRadius: 50,
-        backgroundColor: '#1565c0',
-        justifyContent: 'center',
-    },
-    btnTitle: {
-        fontWeight: '500',
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#fff',
-    }
 });

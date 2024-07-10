@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { SpinnerProvider } from '@store/Spinner';
+import { BottomSheetProvider } from './src/store/BottomSheet';
 import RootNavigator from '@routes/RootNavigator';
 
 export default function App() {
@@ -13,7 +14,9 @@ export default function App() {
                 <GestureHandlerRootView>
                     <PaperProvider>
                         <SpinnerProvider>
-                            <RootNavigator />
+                            <BottomSheetProvider>
+                                <RootNavigator />
+                            </BottomSheetProvider>
                         </SpinnerProvider>
                     </PaperProvider>
                 </GestureHandlerRootView>

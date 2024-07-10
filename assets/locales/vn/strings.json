@@ -8,6 +8,7 @@
     "canceled": "Hủy bỏ",
     "total": "Tổng",
     "today": "Hôm nay",
+    "prev_date": "Trước đó",
 
     "hello": "Xin chào",
     "slogan": "Cuộc phiêu lưu của bạn bắt đầu ngay bây giờ",
@@ -37,6 +38,9 @@
     "inval_user_pass": "Tên tài khoản hoặc mật khẩu không hợp lệ",
     "update_success": "Cập nhật thành công",
     "update_fail": "Cập nhật thất bại",
+    "not_found_title": "Không tìm thấy dữ liệu",
+    "not_found_desc": "Danh sách của bạn trống. Vui lòng liên hệ với chúng tôi để biết thêm thông tin.",
 
-    "btn_req": "Cấp quyền"
+    "btn_req": "Cấp quyền",
+    "text_alarm_ga_desc": "Hệ thống quản lý yêu cầu xe và y tế"
 }

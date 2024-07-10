@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import Layout from '@components/Layout';
 import Header from '@components/Header';
-import SettingCard from '@components/Card/SettingCard';
+import SettingCard from '@components/Card/Settings';
 import AvatarBox from '@components/AvatarBox';
 import NotifyToast from '@components/Toast';
 import { settingsList } from '@data';

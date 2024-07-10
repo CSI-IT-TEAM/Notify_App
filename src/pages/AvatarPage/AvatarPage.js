@@ -5,7 +5,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import Layout from '@components/Layout';
 import Header from '@components/Header/Header';
 import { avatarList } from '@data';
-import AvatarCard from '@components/Card/AvatarCard/AvatarCard';
+import AvatarCard from '@components/Card/Avatar';
 import i18n from '@utils/i18n';
 
 export default function AvatarPage({ navigation }) {

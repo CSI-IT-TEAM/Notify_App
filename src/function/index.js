@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { validTokenURL } from '@api';
+import { parseISO, format } from 'date-fns';
 
 /////Check Null or Empty
 export function isNullOrEmpty(value) {
@@ -59,4 +60,13 @@ export const checkValidToken = async(token) => {
     .catch(() => false);
 
     return postData;
+}
+
+//// Get Date Time
+export const getDateFormat = (date, formatDate) => {
+    const dateString = date;
+    const parsedDate = parseISO(dateString);
+    const formattedDate = format(parsedDate, formatDate);
+
+    return formattedDate;
 }

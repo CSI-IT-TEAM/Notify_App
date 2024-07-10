@@ -8,6 +8,7 @@
     "canceled": "Canceled",
     "total": "Total",
     "today": "Today",
+    "prev_date": "Previous Day",
 
     "hello": "Hello",
     "slogan": "Your daily adventure starts now",
@@ -22,7 +23,7 @@
     "permis_req_desc": "Please allow this app to send notifications to your mobile",
 
     "home": "Home",
-    "notify": "Notify",
+    "notify": "Notification",
     "setting": "Settings",
 
     "user_nm": "User Name",
@@ -37,7 +38,10 @@
     "inval_user_pass": "Invalid User or Password",
     "update_success": "Update Completed",
     "update_fail": "Update Failed",
+    "not_found_title": "No Data Found",
+    "not_found_desc": "Your list is empty. Please contact us for more information.",
 
-    "btn_req": "Grant Permissions"
+    "btn_req": "Grant Permissions",
+    "text_alarm_ga_desc": "Vehicle request and medical management system"
 }
   
