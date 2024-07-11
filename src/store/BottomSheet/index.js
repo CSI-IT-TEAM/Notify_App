@@ -72,7 +72,11 @@ function BottomSheetProvider({ children }) {
                     snapPoints={snapPoints}
                     onDismiss={() => { dispatchBottomSheet({ type: 'hiddenModal' }) }}
                     backdropComponent={(backdropProps) => (
-                        <BackDrop {...backdropProps} enableTouchThrough={true} handleClick={() => dispatchBottomSheet({ type: 'hiddenModal' })} />
+                        <BackDrop 
+                            {...backdropProps} 
+                            enableTouchThrough={true} 
+                            handleClick={() => dispatchBottomSheet({ type: 'hiddenModal' })} 
+                        />
                     )}
                 >
                     <BottomSheetScrollView style={styles.contentContainer}>
@@ -95,7 +99,7 @@ function BottomSheetProvider({ children }) {
 function useBottomSheetModal() {
     const context = useContext(BottomSheetContext);
     if (!context) {
-        throw new Error(`useCounter must be used within a BottomSheetContext`);
+        throw new Error(`useBottomSheetModal must be used within a BottomSheetContext`);
     }
     return context;
 }

@@ -6,17 +6,24 @@ import { getDateFormat } from '@function';
 
 const NotifyMessageCard = React.memo(({ data, onClick }) => {
     return (
-        <TouchableOpacity style={[styles.container]} onPress={() => onClick(data?.ALARM_UUID)}>
+        <TouchableOpacity style={styles.container} onPress={() => onClick(data?.ALARM_UUID)}>
             <View style={styles.contentContainer}>
                 <Avatar.Image size={50} source={{ uri: data?.ALARM_ICON }} />
                 <View style={{ flexGrow: 1 }}>
-                    <Text style={styles.title}>{data.TITLE.replace('<body>', '').replace('</body>', '')}</Text>
-                    <Text style={[styles.desc]}>{data.CONTENT_SUM.replace('<body>', '').replace('</body>', '')}</Text>
-                    <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 0.85, flexDirection: 'row', alignItems: 'center' }}>
-                            <RenderHtml value={data?.NOTE} />
+                    <View style={styles.dFlexCenter}>
+                        <View>
+                            <Text style={styles.title}>{data.TITLE.replace('<body>', '').replace('</body>', '')}</Text>
+                            <Text style={styles.desc}>{data.CONTENT_SUM.replace('<body>', '').replace('</body>', '')}</Text>
+                            <View style={styles.status}>
+                                <RenderHtml value={data?.NOTE} />
+                            </View>
                         </View>
-                        <Text style={{ fontWeight: '600', color: '#555' }}>{getDateFormat(data?.ALARM_DT, 'hh:mm aa')}</Text>
+                        <View style={{alignItems: 'center'}}>
+                            {data?.IS_TODAY === 'N' &&
+                                <Text style={styles.datetime}>{getDateFormat(data?.ALARM_DT, 'dd MMM')}</Text>
+                            }
+                            <Text style={styles.datetime}>{getDateFormat(data?.ALARM_DT, 'hh:mm aa')}</Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -29,6 +36,20 @@ export default NotifyMessageCard;
 const styles = StyleSheet.create({
     container: {
         marginBottom: 7,
+    },
+    dFlexCenter: {
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    status: {
+        flex: 0.85,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    datetime: {
+        fontWeight: '600',
+        color: '#555'
     },
     contentContainer: {
         paddingHorizontal: 15,

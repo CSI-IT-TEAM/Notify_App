@@ -23,7 +23,11 @@ const DetailList = ({ data, refresh, onClick, onRefresh }) => {
             sections={data}
             keyExtractor={(item) => item.ALARM_UUID}
             renderSectionHeader={({ section: { title } }) => (
-                <Text style={{ fontSize: 20, fontWeight: '600', marginBottom: 15, marginTop: data.length === 1 ? 0 : title === 'today' ? 0 : 15 }}>{t(title)}</Text>
+                <Text 
+                    style={[styles.sectionTitle, { marginTop: (data.length === 1 || title === 'today') ? 0 : 15 }]}
+                >   
+                    {t(title)}
+                </Text>
             )}
             renderItem={({ item }) => <NotifyMessageCard data={item} onClick={onClick} />}
             showsVerticalScrollIndicator={false}
@@ -225,5 +229,10 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         marginRight: 10,
+    },
+    sectionTitle: {
+        fontSize: 20, 
+        fontWeight: '600', 
+        marginBottom: 15,
     }
 });
